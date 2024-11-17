@@ -1,18 +1,8 @@
-<form action="action_page.php" method="post">
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <span class="psw">Forgot <a href="#">password?</a></span> <p style="display: inline;">Don't have an account? <%= link_to "Sign Up", new_user_path%>
-  </div>
-</form>
+<% if current_user %>
+<h2><%= current_user.email%></h2>
+<%= link_to "Edit Account", edit_user_registration_path %>
+<%=  button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete %>
+<%else %>
+<%= link_to "Login", new_user_session_path%>
+<%= link_to "Create Account", new_user_registration_path%>
+<% end %>
