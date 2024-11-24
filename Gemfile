@@ -32,6 +32,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'rspotify'
+gem "omniauth-spotify"
 gem 'yt', '~> 0.32.0'
 gem 'faraday'
 
