@@ -26,12 +26,16 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   config.omniauth :google_oauth2, 
-    Rails.application.credentials.dig(:google_oauth_client_id),
-    Rails.application.credentials.dig(:google_oauth_client_secret)
+    Rails.application.credentials.dig(:google_oauth2, :google_oauth_client_id),
+    Rails.application.credentials.dig(:google_oauth2, :google_oauth_client_secret)
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
-
-  # Configure the parent class responsible to send e-mails.
+  # Add Spotify OmniAuth provider
+  require 'rspotify/oauth'
+  config.omniauth :spotify,
+    Rails.application.credentials.dig(:spotify, :client_id),
+    Rails.application.credentials.dig(:spotify, :client_secret),
+    scope: 'user-read-email playlist-read-private playlist-read-collaborative playlist-modify-public user-library-read user-library-modify'  # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration

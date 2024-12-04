@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_17_180150) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_03_032631) do
   create_table "streaming_services", force: :cascade do |t|
     t.string "service_name"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "spotify_uid"
+    t.string "spotify_access_token"
     t.index ["user_id"], name: "index_streaming_services_on_user_id"
   end
 
@@ -31,6 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_17_180150) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "spotify_uid"
+    t.string "spotify_access_token"
+    t.string "spotify_refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

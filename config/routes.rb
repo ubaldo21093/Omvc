@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    session: 'users/sessions',
+    sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  #get 'home/index'
-  root 'home#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Remove the individual get routes since they're handled by resources
+  resources :streaming_services, only: [:index, :show] do
+    collection do
+      get 'connect_spotify'
+    end
+  end
+  
+  root 'home#index'
 end

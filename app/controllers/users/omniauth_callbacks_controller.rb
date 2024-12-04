@@ -21,6 +21,30 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_user_session_path
     end
   end
+
+  def spotify
+    auth = request.env["omniauth.auth"]
+    
+    if current_user
+      streaming_service = current_user.streaming_services.find_or_initialize_by(
+        service_name: 'spotify'
+      )
+      
+      streaming_service.update(
+        spotify_uid: auth.uid,
+        spotify_access_token: auth.credentials.token
+      )
+      
+      redirect_to root_path, notice: 'Spotify account successfully linked!'
+    else
+      session["devise.spotify_data"] = auth
+      redirect_to streaming_services_path
+    end
+  end
+
+def failure
+  redirect_to root_path
+end
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
@@ -47,3 +71,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @auth ||= request.env['omniauth.auth']
   end
 end
+

@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <% if current_user.spotify_uid.present? %>
+    <% @streaming_services.each do |service| %>
+      <%= service.service_name %>
+    <% end %>
+  <% else %>
+    <%= form_tag user_spotify_omniauth_authorize_path, method: :post, data: { turbo: false } do %>
+      <%= image_submit_tag "Spotify_Full_Logo_RGB_Green.png", alt: "Connect Spotify" %>
+    <% end %>
+    <p>Connect your Spotify account to continue</p>
+  <% end %>
+<% else %>
+  <p>Please sign in to access your streaming services</p>
+<% end %>

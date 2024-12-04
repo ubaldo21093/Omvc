@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+ body {
+    background-color: #1e2124;
+  }
+  
+  .btn {
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .btn-primary {
+    background-color: #4A90E2;
+    border: none;
+    &:hover {
+      background-color: darken(#4A90E2, 10%);
+    }
+  }
+  
+  .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
